@@ -75,19 +75,30 @@ const Exercise9 = () => {
         },
         resultView: {
             padding: 10,
-            maxwidth: "100%",
-            minHeight: "35%",
+            flex: 1
+        },
+        rowContainer: {
+            flex: 2,
+            justifyContent: 'space-between',
+            alignItems: "center",
+            flexDirection: "row",
+        },
+        rowButtonLeft: {
+            flex: 3,
+            height: "100%"
+        },
+        rowButtonRight: {
+            flex: 1,
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            height: '100%'
         },
         row: {
             flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
             flexWrap: 'wrap',
-            flex: 2
+            flex: 1
         },
         button: {
-            backgroundColor: isDarkMode ? "#3D3C42" : "#FEFBF6",
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
@@ -110,13 +121,21 @@ const Exercise9 = () => {
             </TouchableOpacity>
         );
     }
-    const buttontxt = ['C', 'DEL', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '0', '.', '=']
+    const buttontxt = [
+        ['C', 'DEL'],
+        ['7', '8', '9'],
+        ['4', '5', '6'],
+        ['1', '2', '3'],
+        ['0', '.']
+    ]
+
+    const caculation = ['/', '*', '-', '+', '=']
 
     return (
         <View style={[styles.container]}>
             <View style={styles.resultView}>
                 <TouchableOpacity
-                    style={styles.buttonChangeTheme}
+                    style={[styles.buttonChangeTheme,]}
                     onPress={() => { setIsDarkMode(!isDarkMode) }}
                 >
                     <Feather name={isDarkMode ? "sun" : "moon"} size={24} color={isDarkMode ? "white" : "black"} />
@@ -125,99 +144,35 @@ const Exercise9 = () => {
                 <Text style={[styles.historytext, styles.resultText]}>{currentNumgber}</Text>
             </View>
 
+            <View style={styles.rowContainer}>
+                <View style={styles.rowButtonLeft}>
+                    {
+                        buttontxt.map((row, index) => (
+                            <View style={styles.row}>
+                                {
+                                    row.map((item) => (
+                                        <Button name={item} style={{
+                                            backgroundColor: (index == 0) ? "darkgrey" :
+                                                isDarkMode ? "#3D3C42" : "#FEFBF6",
+                                        }}
 
-            <View style={styles.row}>
-                <View style={styles.button} />
-                <Button
-                    name={buttontxt[0]}
-                    onPress={() => HandleInput(buttontxt[0])}
-                />
-                <Button
-                    name={buttontxt[1]}
-                    onPress={() => HandleInput(buttontxt[1])}
-                />
-                <Button
-                    name={buttontxt[2]}
-                    onPress={() => HandleInput(buttontxt[2])}
-                    style={styles.blueTheme}
-                />
-            </View>
-            <View style={styles.row}>
-                <Button
-                    name={buttontxt[3]}
-                    onPress={() => HandleInput(buttontxt[3])}
-                />
-                <Button
-                    name={buttontxt[4]}
-                    onPress={() => HandleInput(buttontxt[4])}
-                />
-                <Button
-                    name={buttontxt[5]}
-                    onPress={() => HandleInput(buttontxt[5])}
-                />
-                <Button
-                    name={buttontxt[6]}
-                    style={styles.blueTheme}
-                    onPress={() => HandleInput(buttontxt[6])}
-                />
+                                            onPress={() => HandleInput(item)}
+
+                                        />
+                                    ))
+                                }
+                            </View>
+                        ))
+                    }
+                </View>
+                <View style={styles.rowButtonRight}>
+                    {caculation.map((item) => (
+                        <Button name={item} onPress={() => HandleInput(item)} style={styles.blueTheme} />
+                    ))}
+                </View>
             </View>
 
-            <View style={styles.row}>
-                <Button
-                    name={buttontxt[7]}
-                    onPress={() => HandleInput(buttontxt[7])}
-                />
-                <Button
-                    name={buttontxt[8]}
-                    onPress={() => HandleInput(buttontxt[8])}
-                />
-                <Button
-                    name={buttontxt[9]}
-                    onPress={() => HandleInput(buttontxt[9])}
-                />
-                <Button
-                    name={buttontxt[10]}
-                    style={styles.blueTheme}
-                    onPress={() => HandleInput(buttontxt[10])}
-                />
-            </View>
 
-            <View style={styles.row}>
-                <Button
-                    onPress={() => HandleInput(buttontxt[11])}
-                    name={buttontxt[11]}
-                />
-                <Button
-                    name={buttontxt[12]}
-                    onPress={() => HandleInput(buttontxt[12])}
-                />
-                <Button
-                    name={buttontxt[13]}
-                    onPress={() => HandleInput(buttontxt[13])}
-                />
-                <Button
-                    name={buttontxt[14]}
-                    onPress={() => HandleInput(buttontxt[14])}
-                    style={styles.blueTheme}
-                />
-            </View>
-
-            <View style={styles.row}>
-                <View style={styles.button} />
-                <Button
-                    name={buttontxt[15]}
-                    onPress={() => HandleInput(buttontxt[15])}
-                />
-                <Button
-                    name={buttontxt[16]}
-                    onPress={() => HandleInput(buttontxt[16])}
-                />
-                <Button
-                    name={buttontxt[17]}
-                    style={styles.blueTheme}
-                    onPress={() => HandleInput(buttontxt[17])}
-                />
-            </View>
         </View >
     );
 
